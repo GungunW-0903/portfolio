@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Magnetic from './ui/Magnetic';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = ['Home', 'About', 'Skills', 'Projects', 'Contact'];
+  const navLinks = ['Home', 'About', 'Skills', 'Projects', 'Open Source', 'Coding', 'Contact'];
 
   return (
     <nav 
@@ -34,7 +35,7 @@ const Navbar = () => {
         {/* Left Side: Logo/Name */}
         <div className="flex items-center">
           <a href="#" className="text-white text-2xl font-black tracking-tight">
-            Leeshark<span className="text-red-500">.</span>
+            Gungun<span className="text-red-500">.W</span>
           </a>
         </div>
 
@@ -43,7 +44,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <a 
               key={link} 
-              href={`#${link.toLowerCase()}`}
+              href={`#${link.toLowerCase().replace(/\s+/g, '')}`}
               className="text-white/80 hover:text-white font-medium relative group transition-colors duration-300"
             >
               {link}
@@ -55,12 +56,14 @@ const Navbar = () => {
 
         {/* Right Side: CTA Button */}
         <div className="hidden md:block">
-          <a 
-            href="#contact" 
-            className="px-6 py-2.5 rounded-full bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-300 backdrop-blur-md"
-          >
-            Hire Me
-          </a>
+          <Magnetic strength={0.5}>
+            <a
+              href="#contact"
+              className="inline-block px-6 py-2.5 rounded-full bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all duration-300 backdrop-blur-md"
+            >
+              Hire Me
+            </a>
+          </Magnetic>
         </div>
 
         {/* Mobile Hamburger Menu Icon */}
@@ -90,7 +93,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <a 
               key={link} 
-              href={`#${link.toLowerCase()}`}
+              href={`#${link.toLowerCase().replace(/\s+/g, '')}`}
               onClick={() => setIsOpen(false)}
               className="text-white hover:text-black font-bold text-lg border-b border-white/20 pb-2 transition-colors"
             >
