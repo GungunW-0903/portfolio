@@ -112,7 +112,7 @@ const Projects = () => {
         "Helpline Directory compiling local emergency services and police stations."
       ],
       tags: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "Google Maps API"],
-      github: "https://github.com/GungunW-0903",
+      github: "https://github.com/Mohnish27-dev/SafeExit",
       architecture: `
       +------------------+
       |  React Frontend  |
