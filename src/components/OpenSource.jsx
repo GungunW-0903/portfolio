@@ -20,6 +20,15 @@ const OpenSource = () => {
       description: "Refactored the dashboard grid layout to optimize mobile response rates and clean up outdated assets. Fixed component overlap errors on smaller devices and polished hover states.",
       link: "https://github.com/anurag3407/career-pilot/pull/2384",
       tags: ["React.js", "CSS3", "Responsive Grid"]
+    },
+    {
+      prNumber: "#4363",
+      repo: "anurag3407/career-pilot",
+      title: "Train Journey Portfolio Template",
+      status: "Merged",
+      description: "Built a complete scroll-driven Train Journey portfolio template — parallax train-window view, animated project 'stations' on a rail timeline, interactive 3D CSS locomotive, split-flap hero boot sequence, and scroll-driven time-of-day sky transitions. Fully responsive with prefers-reduced-motion support.",
+      link: "https://github.com/anurag3407/career-pilot/pull/4363",
+      tags: ["React.js", "Framer Motion", "Tailwind CSS", "3D CSS"]
     }
   ];
 
