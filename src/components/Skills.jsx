@@ -1,6 +1,7 @@
 import React from 'react';
 import SpotlightCard from './ui/SpotlightCard';
 import AnimatedNumber from './ui/AnimatedNumber';
+import TiltCard from './three/TiltCard';
 
 /* ---------- Category icons (inline, theme-tinted) ---------- */
 const icons = {
@@ -38,38 +39,50 @@ const icons = {
 
 const SkillCategory = ({ title, icon, skills, delay }) => {
   return (
-    <SpotlightCard
+    <TiltCard
       data-aos="fade-up"
       data-aos-delay={delay}
-      className="h-full bg-[#0e0e0e]/90 border border-white/5 rounded-3xl p-6 hover:border-red-500/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(239,68,68,0.10)] transition-all duration-500 group"
+      className="h-full group [perspective:1200px]"
     >
-      <div className="flex items-start justify-between gap-3 mb-5">
-        <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-red-600/25 to-red-950/20 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300 shadow-[0_0_20px_rgba(239,68,68,0.08)]">
-            {icon}
+      {/* Animated glowing gradient border (conic sweep on hover) */}
+      <div className="relative h-full rounded-3xl p-[1.5px] overflow-hidden">
+        <div className="absolute inset-[-40%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(239,68,68,0.9)_60deg,transparent_140deg)] animate-[spin_5s_linear_infinite] pointer-events-none" />
+
+        <SpotlightCard
+          className="relative h-full bg-[#0c0c0c]/95 rounded-3xl p-6 border border-white/5 group-hover:border-transparent transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(239,68,68,0.35)] [transform-style:preserve-3d]"
+        >
+          {/* Floating layer — icon + title lift toward the viewer on hover */}
+          <div className="flex items-start justify-between gap-3 mb-5 transition-transform duration-500 [transform:translateZ(0px)] group-hover:[transform:translateZ(45px)]">
+            <div className="flex items-center gap-3.5">
+              <div className="relative w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-red-600/30 to-red-950/20 border border-red-500/25 flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300 shadow-[0_8px_20px_rgba(239,68,68,0.15)]">
+                <span className="absolute inset-0 rounded-2xl bg-red-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="relative">{icon}</span>
+              </div>
+              <h3 className="text-white text-base font-bold tracking-wide leading-tight group-hover:text-red-400 transition-colors duration-300">
+                {title}
+              </h3>
+            </div>
+            <span className="shrink-0 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-2.5 py-1 rounded-full border border-gray-900 group-hover:border-red-500/30 group-hover:text-red-400/80 transition-all duration-300">
+              {String(skills.length).padStart(2, '0')}
+            </span>
           </div>
-          <h3 className="text-white text-base font-bold tracking-wide leading-tight group-hover:text-red-500 transition-colors duration-300">
-            {title}
-          </h3>
-        </div>
-        <span className="shrink-0 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-2.5 py-1 rounded-full border border-gray-900">
-          {String(skills.length).padStart(2, '0')}
-        </span>
-      </div>
 
-      <div className="w-full h-px bg-gradient-to-r from-red-500/30 via-white/5 to-transparent mb-5" />
+          <div className="w-full h-px bg-gradient-to-r from-red-500/40 via-white/5 to-transparent mb-5 transition-transform duration-500 [transform:translateZ(0px)] group-hover:[transform:translateZ(25px)]" />
 
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold bg-black/50 border border-gray-800 text-gray-300 hover:border-red-500/40 hover:text-white hover:bg-red-950/20 transition-all duration-300 cursor-default"
-          >
-            {skill}
-          </span>
-        ))}
+          {/* Chips lift on a nearer plane */}
+          <div className="flex flex-wrap gap-2 transition-transform duration-500 [transform:translateZ(0px)] group-hover:[transform:translateZ(30px)]">
+            {skills.map((skill, index) => (
+              <span
+                key={index}
+                className="px-3 py-1.5 rounded-full text-xs font-semibold bg-black/50 border border-gray-800 text-gray-300 hover:border-red-500/50 hover:text-white hover:bg-red-950/30 hover:shadow-[0_0_12px_rgba(239,68,68,0.25)] transition-all duration-300 cursor-default"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </SpotlightCard>
       </div>
-    </SpotlightCard>
+    </TiltCard>
   );
 };
 
@@ -139,37 +152,45 @@ const Skills = () => {
           ))}
 
           {/* On Radar (Docker/Redis) Special Card */}
-          <SpotlightCard
+          <TiltCard
             data-aos="fade-up"
             data-aos-delay="400"
-            spotlightColor="rgba(239,68,68,0.24)"
-            className="h-full bg-gradient-to-br from-[#111111]/90 to-red-950/15 border border-red-500/20 rounded-3xl p-6 hover:border-red-500/50 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(239,68,68,0.15)] transition-all duration-500 group overflow-hidden"
+            className="h-full group [perspective:1200px]"
           >
-            <div className="flex items-center gap-3.5 mb-5">
-              <div className="w-12 h-12 shrink-0 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500">
-                <span className="w-3 h-3 rounded-full bg-red-500 animate-ping" />
-              </div>
-              <h3 className="text-white text-base font-bold tracking-wide group-hover:text-red-500 transition-colors duration-300">
-                Skills On Radar
-              </h3>
-            </div>
+            <div className="relative h-full rounded-3xl p-[1.5px] overflow-hidden">
+              <div className="absolute inset-[-40%] opacity-60 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(239,68,68,0.9)_60deg,transparent_140deg)] animate-[spin_5s_linear_infinite] pointer-events-none" />
 
-            <p className="text-xs text-gray-400 font-medium mb-6 leading-relaxed">
-              Actively diving into containerization and caching systems to build highly optimized, enterprise-ready web applications.
-            </p>
-
-            <div className="flex flex-wrap gap-2.5">
-              {radarSkills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-red-950/20 border border-red-500/30 text-red-400 hover:border-red-500 hover:text-white transition-all duration-300 cursor-default"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                  {skill}
+              <SpotlightCard
+                spotlightColor="rgba(239,68,68,0.24)"
+                className="relative h-full bg-gradient-to-br from-[#0f0808]/95 to-red-950/25 rounded-3xl p-6 border border-red-500/20 group-hover:border-transparent transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(239,68,68,0.4)] overflow-hidden [transform-style:preserve-3d]"
+              >
+                <div className="flex items-center gap-3.5 mb-5 transition-transform duration-500 group-hover:[transform:translateZ(45px)]">
+                  <div className="w-12 h-12 shrink-0 rounded-2xl bg-red-600/25 border border-red-500/40 flex items-center justify-center text-red-500 shadow-[0_8px_20px_rgba(239,68,68,0.2)]">
+                    <span className="w-3 h-3 rounded-full bg-red-500 animate-ping" />
+                  </div>
+                  <h3 className="text-white text-base font-bold tracking-wide group-hover:text-red-400 transition-colors duration-300">
+                    Skills On Radar
+                  </h3>
                 </div>
-              ))}
+
+                <p className="text-xs text-gray-400 font-medium mb-6 leading-relaxed transition-transform duration-500 group-hover:[transform:translateZ(20px)]">
+                  Actively diving into containerization and caching systems to build highly optimized, enterprise-ready web applications.
+                </p>
+
+                <div className="flex flex-wrap gap-2.5 transition-transform duration-500 group-hover:[transform:translateZ(30px)]">
+                  {radarSkills.map((skill, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-red-950/20 border border-red-500/30 text-red-400 hover:border-red-500 hover:text-white hover:shadow-[0_0_12px_rgba(239,68,68,0.3)] transition-all duration-300 cursor-default"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </SpotlightCard>
             </div>
-          </SpotlightCard>
+          </TiltCard>
         </div>
 
       </div>
