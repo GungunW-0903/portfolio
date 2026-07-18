@@ -169,8 +169,8 @@ const Projects = () => {
       `
     },
     {
-      id: "quickshow",
-      name: "QuickShow - Movie Ticket Booking",
+      id: "cinesnap",
+      name: "CineSnap - Movie Ticket Booking",
       timeline: "Dec 2025 - Present",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,7 +186,7 @@ const Projects = () => {
         "Tailwind Adaptive Design: Fully responsive grids with smooth transitions for mobile ticketing."
       ],
       tags: ["React", "Tailwind CSS", "Clerk Auth", "REST API", "State Lockers"],
-      github: "https://github.com/GungunW-0903",
+      github: "https://github.com/GungunW-0903/CineSnap",
       architecture: `
       +-------------------------+      +-------------------+
       |     React UI Client     +------>    Clerk Auth     |
