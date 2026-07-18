@@ -1,8 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import SpotlightCard from './ui/SpotlightCard';
 import AnimatedNumber from './ui/AnimatedNumber';
-import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 /* ---------- Category icons (inline, theme-tinted) ---------- */
 const icons = {
@@ -38,45 +36,28 @@ const icons = {
   ),
 };
 
-/* ---------- Animated proficiency meter ---------- */
-const ProficiencyBar = ({ level }) => {
-  const reduced = usePrefersReducedMotion();
-  return (
-    <div className="mb-5">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500">Proficiency</span>
-        <span className="text-[10px] font-black text-red-500">{level}%</span>
-      </div>
-      <div className="h-1.5 w-full rounded-full bg-black/60 overflow-hidden border border-white/5">
-        <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-red-600 via-red-500 to-red-400 shadow-[0_0_10px_rgba(239,68,68,0.5)]"
-          initial={{ width: reduced ? `${level}%` : 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.1, ease: 'easeOut' }}
-        />
-      </div>
-    </div>
-  );
-};
-
-const SkillCategory = ({ title, icon, level, skills, delay }) => {
+const SkillCategory = ({ title, icon, skills, delay }) => {
   return (
     <SpotlightCard
       data-aos="fade-up"
       data-aos-delay={delay}
       className="h-full bg-[#0e0e0e]/90 border border-white/5 rounded-3xl p-6 hover:border-red-500/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(239,68,68,0.10)] transition-all duration-500 group"
     >
-      <div className="flex items-center gap-3.5 mb-5">
-        <div className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-red-600/25 to-red-950/20 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300 shadow-[0_0_20px_rgba(239,68,68,0.08)]">
-          {icon}
+      <div className="flex items-start justify-between gap-3 mb-5">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-red-600/25 to-red-950/20 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300 shadow-[0_0_20px_rgba(239,68,68,0.08)]">
+            {icon}
+          </div>
+          <h3 className="text-white text-base font-bold tracking-wide leading-tight group-hover:text-red-500 transition-colors duration-300">
+            {title}
+          </h3>
         </div>
-        <h3 className="text-white text-base font-bold tracking-wide leading-tight group-hover:text-red-500 transition-colors duration-300">
-          {title}
-        </h3>
+        <span className="shrink-0 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-2.5 py-1 rounded-full border border-gray-900">
+          {String(skills.length).padStart(2, '0')}
+        </span>
       </div>
 
-      <ProficiencyBar level={level} />
+      <div className="w-full h-px bg-gradient-to-r from-red-500/30 via-white/5 to-transparent mb-5" />
 
       <div className="flex flex-wrap gap-2">
         {skills.map((skill, index) => (
@@ -101,12 +82,12 @@ const Skills = () => {
   ];
 
   const categories = [
-    { title: 'Programming Languages', icon: icons.code, level: 90, skills: ['C++', 'Python', 'Java', 'JavaScript (ES6+)', 'SQL'], delay: 100 },
-    { title: 'Frontend Development', icon: icons.layout, level: 92, skills: ['React.js', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS'], delay: 150 },
-    { title: 'Backend & Services', icon: icons.server, level: 85, skills: ['Node.js', 'Express.js', 'Firebase', 'REST APIs'], delay: 200 },
-    { title: 'Databases', icon: icons.database, level: 80, skills: ['MongoDB', 'MySQL'], delay: 250 },
-    { title: 'UI/UX Design', icon: icons.pen, level: 88, skills: ['Figma', 'Wireframing', 'Prototyping', 'User Research', 'Visual Design', 'Info Architecture'], delay: 300 },
-    { title: 'Tools & Platforms', icon: icons.tool, level: 90, skills: ['Git', 'GitHub', 'Postman', 'VS Code'], delay: 350 },
+    { title: 'Programming Languages', icon: icons.code, skills: ['C++', 'Python', 'Java', 'JavaScript (ES6+)', 'SQL'], delay: 100 },
+    { title: 'Frontend Development', icon: icons.layout, skills: ['React.js', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS'], delay: 150 },
+    { title: 'Backend & Services', icon: icons.server, skills: ['Node.js', 'Express.js', 'Firebase', 'REST APIs'], delay: 200 },
+    { title: 'Databases', icon: icons.database, skills: ['MongoDB', 'MySQL'], delay: 250 },
+    { title: 'UI/UX Design', icon: icons.pen, skills: ['Figma', 'Wireframing', 'Prototyping', 'User Research', 'Visual Design', 'Info Architecture'], delay: 300 },
+    { title: 'Tools & Platforms', icon: icons.tool, skills: ['Git', 'GitHub', 'Postman', 'VS Code'], delay: 350 },
   ];
 
   const radarSkills = ['Docker', 'Redis'];
