@@ -1,22 +1,26 @@
 import React from 'react';
+import SpotlightCard from './ui/SpotlightCard';
+import AnimatedNumber from './ui/AnimatedNumber';
 
-const ProfileCard = ({ platform, icon, link, stats, hoverGlow }) => {
+const ProfileCard = ({ platform, icon, link, stats, delay }) => {
   return (
-    <div 
+    <SpotlightCard
       data-aos="fade-up"
-      className={`bg-[#111111]/90 border border-gray-800 rounded-3xl p-6 transition-all duration-500 hover:border-red-500/50 group flex flex-col justify-between min-h-[260px] ${hoverGlow}`}
+      data-aos-delay={delay}
+      className="bg-[#111111]/90 border border-white/5 rounded-3xl p-6 transition-all duration-500 hover:border-red-500/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(239,68,68,0.10)] group flex flex-col justify-between min-h-[280px]"
     >
       <div>
         <div className="flex justify-between items-start mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-black border border-gray-800 flex items-center justify-center text-gray-400 group-hover:text-red-500 group-hover:border-red-500/20 transition-all duration-300">
+          <div className="w-13 h-13 p-3 rounded-2xl bg-gradient-to-br from-red-600/20 to-black border border-red-500/20 flex items-center justify-center text-gray-300 group-hover:text-red-500 group-hover:scale-110 transition-all duration-300 shadow-[0_0_20px_rgba(239,68,68,0.08)]">
             {icon}
           </div>
-          <span className="text-[9px] font-mono font-bold tracking-widest text-red-500 uppercase bg-red-950/20 px-3 py-1 rounded-full border border-red-500/10">
-            Active Profile
+          <span className="flex items-center gap-1.5 text-[9px] font-mono font-bold tracking-widest text-red-500 uppercase bg-red-950/20 px-3 py-1 rounded-full border border-red-500/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+            Active
           </span>
         </div>
 
-        <h3 className="text-white text-xl font-bold mb-4 group-hover:text-red-500 transition-colors duration-300">
+        <h3 className="text-white text-xl font-bold mb-5 group-hover:text-red-500 transition-colors duration-300">
           {platform}
         </h3>
 
@@ -25,24 +29,24 @@ const ProfileCard = ({ platform, icon, link, stats, hoverGlow }) => {
           {stats.map((stat, idx) => (
             <div key={idx} className="flex justify-between items-center text-xs font-semibold text-gray-400 border-b border-gray-800/40 pb-1.5">
               <span>{stat.label}</span>
-              <span className="text-white font-bold">{stat.value}</span>
+              <AnimatedNumber value={stat.value} className="text-white font-black tabular-nums" />
             </div>
           ))}
         </div>
       </div>
 
-      <a 
-        href={link} 
-        target="_blank" 
+      <a
+        href={link}
+        target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl bg-black border border-gray-800 text-gray-300 font-bold text-xs hover:bg-white/5 hover:text-white transition-all duration-300"
+        className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-2xl bg-black border border-gray-800 text-gray-300 font-bold text-xs hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-300"
       >
         View Live Profile
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
       </a>
-    </div>
+    </SpotlightCard>
   );
 };
 
@@ -114,13 +118,13 @@ const CodingProfiles = () => {
         {/* Profiles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {profiles.map((profile, idx) => (
-            <ProfileCard 
+            <ProfileCard
               key={idx}
               platform={profile.platform}
               icon={profile.icon}
               link={profile.link}
               stats={profile.stats}
-              hoverGlow={profile.hoverGlow}
+              delay={idx * 120}
             />
           ))}
         </div>

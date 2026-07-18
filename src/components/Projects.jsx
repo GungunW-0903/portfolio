@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import figmaDesign1 from '../assets/about/figma_design.png';
 import figmaDesign2 from '../assets/about/dashboard_design.png';
 import TiltCard from './three/TiltCard';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
-const ProjectCard = ({ project, onClick }) => {
+const ProjectCard = ({ project, onClick, station, aos = 'fade-up' }) => {
   const isFigma = project.id.startsWith('figma');
 
   return (
     <TiltCard
-      data-aos="fade-up"
+      data-aos={aos}
       onClick={onClick}
       className="bg-[#111111]/80 border border-gray-800 rounded-3xl p-6 hover:border-red-500/50 hover:shadow-[0_15px_40px_rgba(239,68,68,0.1)] transition-all duration-500 cursor-pointer group flex flex-col justify-between min-h-[360px] relative overflow-hidden backdrop-blur-md"
     >
@@ -29,9 +31,16 @@ const ProjectCard = ({ project, onClick }) => {
           <div className="w-12 h-12 rounded-2xl bg-red-950/30 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:scale-110 transition-transform duration-300">
             {project.icon}
           </div>
-          <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-3 py-1 rounded-full border border-gray-900">
-            {project.timeline}
-          </span>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-3 py-1 rounded-full border border-gray-900">
+              {project.timeline}
+            </span>
+            {station && (
+              <span className="text-[9px] font-mono font-black text-red-500/80 uppercase tracking-[0.2em]">
+                STN {String(station).padStart(2, '0')}
+              </span>
+            )}
+          </div>
         </div>
 
         <h3 className="text-white text-xl font-bold mb-3 group-hover:text-red-500 transition-colors duration-300">
@@ -72,6 +81,16 @@ const ProjectCard = ({ project, onClick }) => {
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const timelineRef = useRef(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  // Scroll-driven railway: progress maps to the glowing track fill + train position.
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start center', 'end center'],
+  });
+  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 22, mass: 0.4 });
+  const trainTop = useTransform(progress, (v) => `${Math.min(100, Math.max(0, v * 100))}%`);
 
   const projectsData = [
     {
@@ -315,17 +334,112 @@ const Projects = () => {
             Featured Projects
           </h2>
           <div className="w-16 h-1 bg-red-600 mx-auto mt-4" />
+          <p className="text-gray-500 text-xs md:text-sm font-medium mt-4 tracking-wide">
+            Scroll to ride the line — every station is a shipped project.
+          </p>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projectsData.map((project, idx) => (
-            <ProjectCard 
-              key={idx} 
-              project={project} 
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
+        {/* ---- Railway Timeline ---- */}
+        <div ref={timelineRef} className="relative">
+
+          {/* Track base: two rails + sleepers */}
+          <div
+            aria-hidden="true"
+            className="absolute left-5 md:left-1/2 top-0 bottom-0 w-3 -translate-x-1/2 border-x-2 border-gray-800/80"
+            style={{
+              background:
+                'repeating-linear-gradient(to bottom, transparent 0px, transparent 10px, rgba(64,64,64,0.5) 10px, rgba(64,64,64,0.5) 14px)',
+            }}
+          />
+
+          {/* Glowing progress fill (electrified track behind the train) */}
+          <motion.div
+            aria-hidden="true"
+            style={{ height: reducedMotion ? '100%' : trainTop }}
+            className="absolute left-5 md:left-1/2 top-0 w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-red-600 via-red-500 to-red-400 shadow-[0_0_18px_rgba(239,68,68,0.8)]"
+          />
+
+          {/* The train — rides the track with scroll */}
+          {!reducedMotion && (
+            <motion.div
+              aria-hidden="true"
+              style={{ top: trainTop }}
+              className="absolute left-5 md:left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <div className="relative flex flex-col items-center">
+                {/* Headlight beam sweeping ahead */}
+                <div
+                  className="absolute top-9 w-10 h-16 bg-gradient-to-b from-red-500/35 to-transparent"
+                  style={{ clipPath: 'polygon(38% 0, 62% 0, 100% 100%, 0 100%)' }}
+                />
+                {/* Locomotive body (front view) */}
+                <div className="relative w-9 h-11 rounded-xl bg-gradient-to-b from-[#2b2b2b] to-[#0d0d0d] border border-red-500/50 shadow-[0_0_28px_rgba(239,68,68,0.55)] flex flex-col items-center pt-1.5">
+                  {/* Windshield */}
+                  <div className="w-6 h-3 rounded-sm bg-gradient-to-b from-red-500/70 to-red-900/40 border border-red-400/40" />
+                  {/* Headlight */}
+                  <div className="mt-1.5 w-2 h-2 rounded-full bg-red-300 shadow-[0_0_14px_rgba(252,165,165,1)] animate-pulse" />
+                  {/* Side buffers */}
+                  <div className="absolute -left-1.5 top-2.5 w-1 h-6 rounded bg-[#1c1c1c] border border-gray-800" />
+                  <div className="absolute -right-1.5 top-2.5 w-1 h-6 rounded bg-[#1c1c1c] border border-gray-800" />
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Station rows */}
+          <div className="space-y-14 md:space-y-24 py-4">
+            {projectsData.map((project, idx) => {
+              const onLeft = idx % 2 === 0;
+              return (
+                <div key={idx} className="relative md:grid md:grid-cols-2 md:gap-20 md:items-center">
+
+                  {/* Station node on the track */}
+                  <motion.div
+                    initial={reducedMotion ? false : { scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                    className="absolute left-5 md:left-1/2 top-10 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-10"
+                  >
+                    <div className="relative flex items-center justify-center">
+                      <span className="absolute w-7 h-7 rounded-full border border-red-500/40 animate-ping opacity-30" />
+                      <span className="w-5 h-5 rounded-full bg-[#0a0a0a] border-2 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.7)] flex items-center justify-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Platform connector from track to card */}
+                  <div
+                    aria-hidden="true"
+                    className={`absolute top-10 md:top-1/2 h-px bg-gradient-to-r from-red-500/60 to-transparent left-7 w-7 md:w-14 ${
+                      onLeft
+                        ? 'md:left-auto md:right-1/2 md:mr-2.5 md:bg-gradient-to-l'
+                        : 'md:left-1/2 md:ml-2.5'
+                    }`}
+                  />
+
+                  {/* Project card (alternates sides on desktop) */}
+                  <div className={`pl-12 md:pl-0 ${onLeft ? 'md:pr-4' : 'md:col-start-2 md:pl-4'}`}>
+                    <ProjectCard
+                      project={project}
+                      station={idx + 1}
+                      aos={onLeft ? 'fade-right' : 'fade-left'}
+                      onClick={() => setSelectedProject(project)}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Terminus marker */}
+          <div className="relative flex justify-center mt-10 md:mt-14">
+            <div className="absolute left-5 md:left-1/2 -translate-x-1/2 -top-4 w-6 h-1.5 rounded-full bg-red-600 shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
+            <span className="ml-10 md:ml-0 text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-gray-600">
+              — End of Line · More Shipping Soon —
+            </span>
+          </div>
         </div>
       </div>
 

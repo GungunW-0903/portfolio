@@ -1,4 +1,5 @@
 import React from 'react';
+import SpotlightCard from './ui/SpotlightCard';
 
 const OpenSource = () => {
   const contributions = [
@@ -65,11 +66,11 @@ const OpenSource = () => {
         {/* Pull Requests Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {contributions.map((pr, idx) => (
-            <div 
+            <SpotlightCard
               key={idx}
               data-aos="fade-up"
               data-aos-delay={idx * 150}
-              className="bg-[#111111]/60 border border-gray-800 rounded-3xl p-6 flex flex-col justify-between hover:border-red-500/50 hover:shadow-[0_15px_40px_rgba(239,68,68,0.08)] transition-all duration-500 group"
+              className="bg-[#111111]/60 border border-white/5 rounded-3xl p-6 flex flex-col justify-between hover:border-red-500/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(239,68,68,0.10)] transition-all duration-500 group"
             >
               <div>
                 {/* PR Status HUD */}
@@ -124,7 +125,7 @@ const OpenSource = () => {
                   View Pull Request
                 </a>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 
