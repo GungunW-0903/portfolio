@@ -90,7 +90,7 @@ const Skills = () => {
   const stats = [
     { value: '6+', label: 'Languages' },
     { value: '12+', label: 'Frameworks & Tools' },
-    { value: '311', label: 'DSA Problems' },
+    { value: '400+', label: 'DSA Problems Solved' },
     { value: '3', label: 'Open-Source PRs' },
   ];
 
