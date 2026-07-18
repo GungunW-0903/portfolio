@@ -180,7 +180,7 @@ const Hero = () => {
               </svg>
             </a>
             <a 
-              href="https://leetcode.com/u/GungunW-0903/" 
+              href="https://leetcode.com/u/lkde5nkwCE/"
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-gray-400 hover:text-white transition-colors duration-300"

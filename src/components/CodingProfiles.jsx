@@ -54,16 +54,16 @@ const CodingProfiles = () => {
   const profiles = [
     {
       platform: "LeetCode",
-      link: "https://leetcode.com/u/GungunW-0903/",
+      link: "https://leetcode.com/u/lkde5nkwCE/",
       icon: (
         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
           <path d="M13.483 0a1.374 1.374 0 00-.961.414l-9.8 9.8a1.374 1.374 0 000 1.94l9.8 9.8a1.374 1.374 0 001.94 0l9.8-9.8a1.374 1.374 0 000-1.94l-9.8-9.8a1.374 1.374 0 00-.979-.414zm0 2.748l8.4 8.4-8.4 8.4-8.4-8.4 8.4-8.4zm-1.4 3.5v2.8h2.8v-2.8h-2.8z"/>
         </svg>
       ),
       stats: [
-        { label: "Problems Solved", value: "250+" },
-        { label: "Contest Rating", value: "1480+" },
-        { label: "DSA Badges Earned", value: "50 Days Badge" }
+        { label: "Problems Solved", value: "311" },
+        { label: "Contest Rating", value: "1432" },
+        { label: "50 Days Badges", value: "2" }
       ],
       hoverGlow: "hover:shadow-[0_15px_40px_rgba(239,68,68,0.06)]"
     },
@@ -78,7 +78,7 @@ const CodingProfiles = () => {
       stats: [
         { label: "Total Repositories", value: "15+" },
         { label: "Yearly Contributions", value: "240+ Commits" },
-        { label: "GSSoC Pull Requests", value: "2 Merged" }
+        { label: "GSSoC Pull Requests", value: "3 Merged" }
       ],
       hoverGlow: "hover:shadow-[0_15px_40px_rgba(239,68,68,0.06)]"
     },
