@@ -100,8 +100,12 @@ const CodingProfiles = () => {
   ];
 
   return (
-    <section id="coding" className="bg-[#0a0a0a] pt-28 pb-28 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-gray-950">
-      
+    <section id="coding" className="pt-28 pb-28 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(215deg,#0d0404_0%,#0a0a0a_40%,#100606_80%,#080303_100%)]">
+
+      {/* Ambient glows */}
+      <div className="absolute top-20 left-0 w-[400px] h-[400px] rounded-full bg-red-700/7 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-[450px] h-[300px] bg-red-600/6 blur-[110px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}

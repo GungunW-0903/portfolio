@@ -12,7 +12,7 @@ const Contact = () => {
   const y = useTransform(scrollYProgress, [0, 1], ["-20%", "30%"]);
 
   return (
-    <section ref={ref} id="contact" className="bg-[#0a0a0a] w-full min-h-screen relative overflow-hidden flex items-end pt-32 pb-0 md:pb-0 border-t border-gray-900">
+    <section ref={ref} id="contact" className="w-full min-h-screen relative overflow-hidden flex items-end pt-32 pb-0 md:pb-0 border-t border-red-950/40 bg-[linear-gradient(170deg,#080303_0%,#0a0a0a_35%,#140505_75%,#0a0a0a_100%)]">
       {/* Huge Background Text */}
       <motion.div 
         style={{ y }}

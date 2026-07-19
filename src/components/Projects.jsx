@@ -95,40 +95,44 @@ const Projects = () => {
   const projectsData = [
     {
       id: "safeexit",
-      name: "SafeExit (Women's Safety Platform)",
+      name: "SafeExit - Hostel Outing Management",
       timeline: "Recent Project",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v1m6 11h2m-6.5-5.5L16 8m-8 2.5L5.5 8M12 14a2 2 0 100-4 2 2 0 000 4zm0 0v7m-7-3h14a1 1 0 001-1V6a1 1 0 00-1-1H5a1 1 0 00-1 1v11a1 1 0 001 1z" />
         </svg>
       ),
-      description: "A comprehensive safety web platform designed specifically to aid and protect women during commutes, enabling real-time SOS transmissions, map navigations, and dynamic community-driven alert feeds.",
-      problem: "Women often face major safety concerns during nighttime commutes. SafeExit was built to bridge the gap between emergency alerts, active location mapping, and community assistance directories to ensure help is just one click away.",
+      description: "A full-stack hostel outing and complaint management system with role-based dashboards for students, wardens, and security guards — QR-verified exits, approval workflows, and complaint tracking.",
+      problem: "Hostel outing registers are manual, slow, and easy to fake. SafeExit digitizes the entire workflow: students request outings, wardens approve or reject them, and security guards verify students at the gate by scanning a unique QR code — updating exit/return status in real time.",
       features: [
-        "One-Click SOS button that instantly alerts trusted contacts with user's live coordinates.",
-        "Real-Time Location Tracking using WebSocket connections to broadcast safe transit paths.",
-        "Crowdsourced Safety Route Planner highlighting route illumination and security levels.",
-        "Fake Call Simulator dashboard to deter potential street threats.",
-        "Helpline Directory compiling local emergency services and police stations."
+        "Role-Based Dashboards: Separate portals for students, wardens, and security guards with role-based access control.",
+        "Secure Auth: JWT authentication with bcrypt password hashing.",
+        "Outing Workflow: Students submit requests, wardens approve/reject, approved requests generate unique QR codes.",
+        "QR Gate Verification: Guards scan QR codes to verify students and update exit/return status in real time.",
+        "Complaint Module: Students raise hostel issues directly from their dashboard and track resolution status."
       ],
-      tags: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "Google Maps API"],
+      tags: ["Next.js", "React", "Node.js", "Express", "MongoDB", "JWT", "QR Code"],
       github: "https://github.com/Mohnish27-dev/SafeExit",
       architecture: `
-      +------------------+
-      |  React Frontend  |
-      +--------+---------+
+      +---------------------+
+      |  Next.js Frontend   |
+      | (Student/Warden/    |
+      |  Guard dashboards)  |
+      +--------+------------+
                |
-        WebSocket / HTTP
+         JWT-secured REST
                |
-      +--------v---------+
-      |  Node.js Server  +--------> Google Maps API
-      +--------+---------+
+      +--------v------------+
+      |  Express API Server +----> QR Generate/Scan
+      +--------+------------+
                |
-        Mongoose Schema
+        Mongoose Models
+        (users, outings,
+         complaints)
                |
-      +--------v---------+
-      |     MongoDB      |
-      +------------------+
+      +--------v------------+
+      |      MongoDB        |
+      +---------------------+
       `
     },
     {
@@ -321,8 +325,12 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="bg-[#0a0a0a] pt-28 pb-32 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-gray-950">
-      
+    <section id="projects" className="pt-28 pb-32 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(200deg,#080404_0%,#0c0c0c_30%,#130505_65%,#0a0a0a_100%)]">
+
+      {/* Ambient red glows along the rail line */}
+      <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-red-600/6 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-40 right-0 w-[400px] h-[400px] rounded-full bg-red-800/8 blur-[130px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Section Title */}
