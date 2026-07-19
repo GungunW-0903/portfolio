@@ -208,6 +208,19 @@ const Hero = () => {
             </Magnetic>
             <Magnetic>
               <a
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-transparent border border-red-500/50 text-red-400 font-bold hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                Resume
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
                 href="#contact"
                 className="inline-block px-6 py-3 rounded-full bg-transparent border border-gray-600 text-gray-300 font-bold hover:bg-white/5 hover:text-white transition-all duration-300"
               >

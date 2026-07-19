@@ -4,6 +4,7 @@ import Magnetic from './ui/Magnetic';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   // Handle scroll to make navbar more solid
   useEffect(() => {
@@ -17,6 +18,28 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Track which section is currently in view
+  useEffect(() => {
+    const ids = ['home', 'about', 'skills', 'projects', 'opensource', 'coding', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const openPalette = () => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
+  };
 
   const navLinks = ['Home', 'About', 'Skills', 'Projects', 'Open Source', 'Coding', 'Contact'];
 
@@ -41,21 +64,52 @@ const Navbar = () => {
 
         {/* Center: Desktop Menu Links */}
         <div className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
-            <a 
-              key={link} 
-              href={`#${link.toLowerCase().replace(/\s+/g, '')}`}
-              className="text-white/80 hover:text-white font-medium relative group transition-colors duration-300"
-            >
-              {link}
-              {/* Smooth hover underline */}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const id = link.toLowerCase().replace(/\s+/g, '');
+            const isActive = activeSection === id;
+            return (
+              <a
+                key={link}
+                href={`#${id}`}
+                className={`font-medium relative group transition-colors duration-300 ${
+                  isActive ? 'text-red-500' : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {link}
+                {/* Underline: full when active, animates on hover otherwise */}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-red-500 transition-all duration-300 ${
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}></span>
+              </a>
+            );
+          })}
         </div>
 
-        {/* Right Side: CTA Button */}
-        <div className="hidden md:block">
+        {/* Right Side: Cmd-K hint + Resume + CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={openPalette}
+            title="Open command palette"
+            className="flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-red-500/40 transition-all duration-300 text-xs font-mono cursor-pointer"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+            <kbd className="text-[9px] tracking-wider">Ctrl K</kbd>
+          </button>
+          <Magnetic strength={0.4}>
+            <a
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-red-600 text-white font-bold text-sm hover:bg-red-500 transition-all duration-300 shadow-[0_4px_18px_rgba(239,68,68,0.45)]"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              Resume
+            </a>
+          </Magnetic>
           <Magnetic strength={0.5}>
             <a
               href="#contact"
@@ -100,10 +154,19 @@ const Navbar = () => {
               {link}
             </a>
           ))}
-          <div className="pt-4 pb-2">
-             <a 
-               href="#contact" 
-               onClick={() => setIsOpen(false)} 
+          <div className="pt-4 pb-2 flex flex-col gap-3">
+             <a
+               href={`${import.meta.env.BASE_URL}resume.pdf`}
+               target="_blank"
+               rel="noopener noreferrer"
+               onClick={() => setIsOpen(false)}
+               className="inline-block px-6 py-3 rounded-full bg-black/20 border border-white/40 text-white font-black hover:bg-black hover:text-white transition-colors w-full text-center"
+             >
+               Download Resume
+             </a>
+             <a
+               href="#contact"
+               onClick={() => setIsOpen(false)}
                className="inline-block px-6 py-3 rounded-full bg-white text-[#ff2a2a] font-black hover:bg-black hover:text-white transition-colors w-full text-center shadow-lg"
              >
                Hire Me

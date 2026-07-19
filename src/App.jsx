@@ -1,6 +1,8 @@
 import React from 'react'
 import Preloader from './components/Preloader'
 import CustomCursor from './components/CustomCursor'
+import ScrollProgress from './components/ui/ScrollProgress'
+import CommandPalette from './components/ui/CommandPalette'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -16,6 +18,8 @@ function App() {
     <>
       <Preloader />
       <CustomCursor />
+      <ScrollProgress />
+      <CommandPalette />
       <Navbar />
       <Hero />
       <About />
