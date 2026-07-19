@@ -14,11 +14,11 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="pt-28 pb-40 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(170deg,#0c0409_0%,#0d0404_30%,#090410_65%,#0a0308_100%)]">
+    <section id="about" className="pt-28 pb-40 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(170deg,#0c0409_0%,#0d0404_30%,#100822_65%,#0a0308_100%)]">
 
       {/* Background radial highlights — crimson left, violet right */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-red-900/12 blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 right-0 w-[420px] h-[420px] rounded-full bg-violet-900/12 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[420px] h-[420px] rounded-full bg-violet-900/16 blur-[150px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-start">
         

@@ -33,11 +33,11 @@ const OpenSource = () => {
   ];
 
   return (
-    <section id="opensource" className="pt-28 pb-24 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(150deg,#0a0510_0%,#110507_40%,#080409_75%,#0d0405_100%)]">
+    <section id="opensource" className="pt-28 pb-24 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(150deg,#120a26_0%,#110507_40%,#0e0720_75%,#0d0405_100%)]">
 
       {/* Background neon glows — crimson + violet */}
       <div className="absolute top-1/2 left-0 w-[420px] h-[420px] rounded-full bg-red-600/8 blur-[110px] pointer-events-none" />
-      <div className="absolute top-10 right-10 w-[350px] h-[350px] rounded-full bg-violet-800/9 blur-[120px] pointer-events-none" />
+      <div className="absolute top-10 right-10 w-[350px] h-[350px] rounded-full bg-violet-800/14 blur-[120px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         

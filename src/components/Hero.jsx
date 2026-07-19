@@ -111,10 +111,11 @@ const Hero = () => {
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 55% at 50% -12%, rgba(220, 38, 38, 0.30), transparent 62%),
-            radial-gradient(ellipse 50% 45% at 108% 70%, rgba(109, 40, 217, 0.20), transparent 65%),
-            radial-gradient(ellipse 42% 38% at -8% 84%, rgba(139, 92, 246, 0.12), transparent 60%),
-            linear-gradient(160deg, #12050a 0%, #0a0512 40%, #070308 70%, #0c0410 100%)
+            radial-gradient(ellipse 75% 55% at 30% -12%, rgba(220, 38, 38, 0.35), transparent 60%),
+            radial-gradient(ellipse 65% 60% at 100% 30%, rgba(124, 58, 237, 0.38), transparent 62%),
+            radial-gradient(ellipse 55% 50% at -5% 85%, rgba(139, 92, 246, 0.25), transparent 60%),
+            radial-gradient(ellipse 50% 45% at 85% 105%, rgba(190, 24, 93, 0.22), transparent 65%),
+            linear-gradient(140deg, #1a060d 0%, #12071f 45%, #0a0410 75%, #150822 100%)
           `,
         }}
       />
@@ -126,8 +127,8 @@ const Hero = () => {
         </Suspense>
       </div>
 
-      {/* Subtle radial glow overlay — fades crystal edges into the dark, keeps text legible */}
-      <div className="absolute inset-0 bg-radial from-transparent via-[#070707]/40 to-[#070707]/85 z-10 pointer-events-none" />
+      {/* Subtle radial glow overlay — fades crystal edges, kept light so the duotone shows through */}
+      <div className="absolute inset-0 bg-radial from-transparent via-transparent to-[#070707]/60 z-10 pointer-events-none" />
 
       {/* Main Container */}
       <div className="relative z-20 px-6 md:px-12 max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-12 pt-16">
@@ -146,7 +147,7 @@ const Hero = () => {
             className="text-white text-4xl sm:text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[1.05]"
           >
             Gungun <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">Wadhwani</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-violet-400">Wadhwani</span>
           </h1>
 
           <h2 

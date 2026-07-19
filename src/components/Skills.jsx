@@ -106,10 +106,10 @@ const Skills = () => {
   const radarSkills = ['Docker', 'Redis'];
 
   return (
-    <section id="skills" className="pt-28 pb-24 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(160deg,#100408_0%,#0a0510_35%,#120606_70%,#0a0410_100%)]">
+    <section id="skills" className="pt-28 pb-24 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(160deg,#100408_0%,#120a26_35%,#120606_70%,#120826_100%)]">
 
       {/* Background decoration — violet right, crimson left */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-violet-700/9 blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-violet-700/14 blur-[130px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[450px] h-[450px] rounded-full bg-red-700/9 blur-[130px] pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-40 bg-red-600/6 blur-[100px] pointer-events-none" />
 

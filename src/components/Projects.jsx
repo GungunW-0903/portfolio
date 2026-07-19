@@ -325,11 +325,11 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="pt-28 pb-32 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(200deg,#0b040c_0%,#0c0c0c_30%,#130507_65%,#090510_100%)]">
+    <section id="projects" className="pt-28 pb-32 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(200deg,#0b040c_0%,#0c0c0c_30%,#130507_65%,#110924_100%)]">
 
       {/* Ambient glows along the rail line — crimson center, violet flanks */}
       <div className="absolute top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-red-600/7 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-40 right-0 w-[400px] h-[400px] rounded-full bg-violet-800/9 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-40 right-0 w-[400px] h-[400px] rounded-full bg-violet-800/14 blur-[130px] pointer-events-none" />
       <div className="absolute top-1/2 left-0 w-[350px] h-[350px] rounded-full bg-red-800/8 blur-[130px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
