@@ -49,12 +49,12 @@ const SkillCategory = ({ title, icon, skills, delay }) => {
         <div className="absolute inset-[-40%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(239,68,68,0.9)_60deg,transparent_140deg)] animate-[spin_5s_linear_infinite] pointer-events-none" />
 
         <SpotlightCard
-          className="relative h-full bg-[#0c0c0c]/95 rounded-3xl p-6 border border-white/5 group-hover:border-transparent transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(239,68,68,0.35)] [transform-style:preserve-3d]"
+          className="neu-card relative h-full rounded-3xl p-6 border border-white/5 group-hover:border-red-500/15 transition-all duration-500 [transform-style:preserve-3d]"
         >
           {/* Floating layer — icon + title lift toward the viewer on hover */}
           <div className="flex items-start justify-between gap-3 mb-5 transition-transform duration-500 [transform:translateZ(0px)] group-hover:[transform:translateZ(45px)]">
             <div className="flex items-center gap-3.5">
-              <div className="relative w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-red-600/30 to-red-950/20 border border-red-500/25 flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300 shadow-[0_8px_20px_rgba(239,68,68,0.15)]">
+              <div className="neu-raised relative w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300">
                 <span className="absolute inset-0 rounded-2xl bg-red-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <span className="relative">{icon}</span>
               </div>
@@ -62,7 +62,7 @@ const SkillCategory = ({ title, icon, skills, delay }) => {
                 {title}
               </h3>
             </div>
-            <span className="shrink-0 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-black/40 px-2.5 py-1 rounded-full border border-gray-900 group-hover:border-red-500/30 group-hover:text-red-400/80 transition-all duration-300">
+            <span className="neu-inset shrink-0 text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2.5 py-1 rounded-full group-hover:text-red-400/80 transition-all duration-300">
               {String(skills.length).padStart(2, '0')}
             </span>
           </div>
@@ -74,7 +74,7 @@ const SkillCategory = ({ title, icon, skills, delay }) => {
             {skills.map((skill, index) => (
               <span
                 key={index}
-                className="px-3 py-1.5 rounded-full text-xs font-semibold bg-black/50 border border-gray-800 text-gray-300 hover:border-red-500/50 hover:text-white hover:bg-red-950/30 hover:shadow-[0_0_12px_rgba(239,68,68,0.25)] transition-all duration-300 cursor-default"
+                className="neu-inset-chip px-3 py-1.5 rounded-full text-xs font-semibold text-gray-300 hover:text-white cursor-default"
               >
                 {skill}
               </span>
@@ -133,7 +133,7 @@ const Skills = () => {
               data-aos="zoom-in"
               data-aos-delay={idx * 80}
               spotlightColor="rgba(239,68,68,0.22)"
-              className="bg-gradient-to-br from-[#111111]/90 to-red-950/10 border border-white/5 rounded-2xl p-5 text-center hover:border-red-500/40 transition-all duration-500"
+              className="neu-card rounded-2xl p-5 text-center border border-white/5 hover:border-red-500/20 transition-all duration-500"
             >
               <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
                 <AnimatedNumber value={stat.value} />
@@ -162,10 +162,10 @@ const Skills = () => {
 
               <SpotlightCard
                 spotlightColor="rgba(239,68,68,0.24)"
-                className="relative h-full bg-gradient-to-br from-[#0f0808]/95 to-red-950/25 rounded-3xl p-6 border border-red-500/20 group-hover:border-transparent transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(239,68,68,0.4)] overflow-hidden [transform-style:preserve-3d]"
+                className="neu-card relative h-full rounded-3xl p-6 border border-red-500/15 group-hover:border-red-500/25 transition-all duration-500 overflow-hidden [transform-style:preserve-3d]"
               >
                 <div className="flex items-center gap-3.5 mb-5 transition-transform duration-500 group-hover:[transform:translateZ(45px)]">
-                  <div className="w-12 h-12 shrink-0 rounded-2xl bg-red-600/25 border border-red-500/40 flex items-center justify-center text-red-500 shadow-[0_8px_20px_rgba(239,68,68,0.2)]">
+                  <div className="neu-raised w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center text-red-500">
                     <span className="w-3 h-3 rounded-full bg-red-500 animate-ping" />
                   </div>
                   <h3 className="text-white text-base font-bold tracking-wide group-hover:text-red-400 transition-colors duration-300">
@@ -181,7 +181,7 @@ const Skills = () => {
                   {radarSkills.map((skill, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-red-950/20 border border-red-500/30 text-red-400 hover:border-red-500 hover:text-white hover:shadow-[0_0_12px_rgba(239,68,68,0.3)] transition-all duration-300 cursor-default"
+                      className="neu-inset-chip flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold text-red-400 hover:text-white cursor-default"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                       {skill}
