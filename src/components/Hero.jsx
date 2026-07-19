@@ -105,6 +105,20 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative w-full h-screen overflow-hidden bg-[#070707] flex items-center justify-center">
+      {/* Red/black landing gradient — deep crimson glow bleeding from the top + corners into black */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 55% at 50% -12%, rgba(220, 38, 38, 0.28), transparent 62%),
+            radial-gradient(ellipse 45% 40% at 108% 68%, rgba(153, 27, 27, 0.20), transparent 65%),
+            radial-gradient(ellipse 40% 35% at -8% 82%, rgba(127, 29, 29, 0.16), transparent 60%),
+            linear-gradient(180deg, #0d0505 0%, #070707 45%, #050202 100%)
+          `,
+        }}
+      />
+
       {/* Background 3D Crystal Cluster */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <Suspense fallback={null}>
@@ -113,7 +127,7 @@ const Hero = () => {
       </div>
 
       {/* Subtle radial glow overlay — fades crystal edges into the dark, keeps text legible */}
-      <div className="absolute inset-0 bg-radial from-transparent via-[#070707]/60 to-[#070707] z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-transparent via-[#070707]/40 to-[#070707]/85 z-10 pointer-events-none" />
 
       {/* Main Container */}
       <div className="relative z-20 px-6 md:px-12 max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-12 pt-16">
