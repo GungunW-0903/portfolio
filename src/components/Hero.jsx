@@ -111,10 +111,10 @@ const Hero = () => {
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 80% 55% at 50% -12%, rgba(220, 38, 38, 0.28), transparent 62%),
-            radial-gradient(ellipse 45% 40% at 108% 68%, rgba(153, 27, 27, 0.20), transparent 65%),
-            radial-gradient(ellipse 40% 35% at -8% 82%, rgba(127, 29, 29, 0.16), transparent 60%),
-            linear-gradient(180deg, #0d0505 0%, #070707 45%, #050202 100%)
+            radial-gradient(ellipse 80% 55% at 50% -12%, rgba(220, 38, 38, 0.30), transparent 62%),
+            radial-gradient(ellipse 50% 45% at 108% 70%, rgba(109, 40, 217, 0.20), transparent 65%),
+            radial-gradient(ellipse 42% 38% at -8% 84%, rgba(139, 92, 246, 0.12), transparent 60%),
+            linear-gradient(160deg, #12050a 0%, #0a0512 40%, #070308 70%, #0c0410 100%)
           `,
         }}
       />
