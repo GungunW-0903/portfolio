@@ -106,7 +106,8 @@ body {
   box-shadow:
     8px 8px 20px rgba(0, 0, 0, 0.75),
     -6px -6px 16px rgba(255, 255, 255, 0.035),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.045);
+    inset 1px 1px 0 rgba(255, 255, 255, 0.045),
+    0 0 24px rgba(239, 68, 68, 0.07);
 }
 .neu-card:hover {
   box-shadow:

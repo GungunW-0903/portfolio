@@ -44,18 +44,18 @@ const SkillCategory = ({ title, icon, skills, delay }) => {
       data-aos-delay={delay}
       className="h-full group [perspective:1200px]"
     >
-      {/* Animated glowing gradient border (conic sweep on hover) */}
+      {/* Animated glowing gradient border (always visible, brightens on hover) */}
       <div className="relative h-full rounded-3xl p-[1.5px] overflow-hidden">
-        <div className="absolute inset-[-40%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(239,68,68,0.9)_60deg,transparent_140deg)] animate-[spin_5s_linear_infinite] pointer-events-none" />
+        <div className="absolute inset-[-40%] opacity-60 group-hover:opacity-100 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(239,68,68,0.9)_60deg,transparent_140deg)] animate-[spin_5s_linear_infinite] pointer-events-none" />
 
         <SpotlightCard
-          className="neu-card relative h-full rounded-3xl p-6 border border-white/5 group-hover:border-red-500/15 transition-all duration-500 [transform-style:preserve-3d]"
+          className="neu-card relative h-full rounded-3xl p-6 border border-red-500/10 group-hover:border-red-500/20 transition-all duration-500 [transform-style:preserve-3d]"
         >
           {/* Floating layer — icon + title lift toward the viewer on hover */}
           <div className="flex items-start justify-between gap-3 mb-5 transition-transform duration-500 [transform:translateZ(0px)] group-hover:[transform:translateZ(45px)]">
             <div className="flex items-center gap-3.5">
               <div className="neu-raised relative w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center text-red-500 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300">
-                <span className="absolute inset-0 rounded-2xl bg-red-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="absolute inset-0 rounded-2xl bg-red-500/15 blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
                 <span className="relative">{icon}</span>
               </div>
               <h3 className="text-white text-base font-bold tracking-wide leading-tight group-hover:text-red-400 transition-colors duration-300">
