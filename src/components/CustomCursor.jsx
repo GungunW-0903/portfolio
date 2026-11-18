@@ -57,7 +57,7 @@ const CustomCursor = () => {
       }
     };
 
-    const handleMouseOut = (e) => {
+    const handleMouseOut = () => {
       ring.style.width = '40px';
       ring.style.height = '40px';
       ring.style.borderColor = 'rgba(239, 68, 68, 0.45)';

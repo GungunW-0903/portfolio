@@ -1,7 +1,16 @@
 import React from 'react';
 import SpotlightCard from './ui/SpotlightCard';
+import AnimatedNumber from './ui/AnimatedNumber';
+import { playBlip } from '../utils/audio';
 
 const OpenSource = () => {
+  const metrics = [
+    { value: '5+', label: 'Merged Pull Requests', sub: 'Production Repositories' },
+    { value: '1,200+', label: 'Lines of Code Merged', sub: 'Clean Frontend & UI' },
+    { value: '100%', label: 'PR Acceptance Rate', sub: 'Zero Rejections' },
+    { value: 'GSSoC 26', label: 'GirlScript Contributor', sub: 'Selected National Cohort' },
+  ];
+
   const contributions = [
     {
       prNumber: "#3400",
@@ -10,7 +19,7 @@ const OpenSource = () => {
       status: "Merged",
       description: "Successfully designed and implemented a gorgeous mono-elegant theme to enhance the Career Pilot dashboard. Cleaned up styling, structured spacing, and resolved visual bottlenecks for placement-oriented users.",
       link: "https://github.com/anurag3407/career-pilot/pull/3400",
-      tags: ["React.js", "Tailwind CSS", "UI Design"]
+      tags: ["React.js", "Tailwind CSS", "UI Design", "Theme System"]
     },
     {
       prNumber: "#2384",
@@ -19,7 +28,7 @@ const OpenSource = () => {
       status: "Merged",
       description: "Refactored the dashboard grid layout to optimize mobile response rates and clean up outdated assets. Fixed component overlap errors on smaller devices and polished hover states.",
       link: "https://github.com/anurag3407/career-pilot/pull/2384",
-      tags: ["React.js", "CSS3", "Responsive Grid"]
+      tags: ["React.js", "CSS3", "Responsive Grid", "Mobile UX"]
     },
     {
       prNumber: "#4363",
@@ -33,7 +42,7 @@ const OpenSource = () => {
   ];
 
   return (
-    <section id="opensource" className="pt-28 pb-24 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(150deg,#120a26_0%,#110507_40%,#0e0720_75%,#0d0405_100%)]">
+    <section id="opensource" className="pt-28 pb-28 px-6 md:px-12 w-full relative overflow-hidden font-sans border-t border-red-950/40 bg-[linear-gradient(150deg,#120a26_0%,#110507_40%,#0e0720_75%,#0d0405_100%)]">
 
       {/* Background neon glows — crimson + violet */}
       <div className="absolute top-1/2 left-0 w-[420px] h-[420px] rounded-full bg-red-600/8 blur-[110px] pointer-events-none" />
@@ -42,81 +51,100 @@ const OpenSource = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
-        <div data-aos="fade-up" className="text-center mb-16">
+        <div data-aos="fade-up" className="text-center mb-12">
           <div className="inline-block border border-red-500/20 rounded-full px-4 py-1.5 text-xs text-red-500 font-bold mb-4 tracking-widest uppercase bg-red-950/10">
             Open Source
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase">
             GSSoC 2026 Contributions
           </h2>
-          <div className="w-16 h-1 bg-red-600 mx-auto mt-4" />
+          <div className="w-16 h-1 bg-red-600 mx-auto mt-4 mb-4" />
+          <p className="text-gray-400 text-xs md:text-sm max-w-xl mx-auto font-medium">
+            Active open-source contributor writing production components, fixing UI bottlenecks, and collaborating with global developer communities.
+          </p>
+        </div>
+
+        {/* Impact Metrics Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {metrics.map((m, idx) => (
+            <div
+              key={idx}
+              data-aos="zoom-in"
+              data-aos-delay={idx * 70}
+              className="neu-inset p-4 rounded-2xl border border-white/5 text-center"
+            >
+              <div className="text-2xl md:text-3xl font-black text-white font-mono">
+                <AnimatedNumber value={m.value} />
+              </div>
+              <div className="text-xs font-bold text-gray-300 mt-1">{m.label}</div>
+              <div className="text-[10px] font-mono text-gray-500 mt-0.5">{m.sub}</div>
+            </div>
+          ))}
         </div>
 
         {/* Intro Banner */}
         <div 
           data-aos="fade-up"
-          className="bg-[#111111] border border-gray-800 rounded-3xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center gap-6 justify-between hover:border-red-500/30 transition-all duration-300"
+          className="neu-card border border-white/10 rounded-3xl p-6 md:p-8 mb-10 flex flex-col md:flex-row items-center gap-6 justify-between hover:border-red-500/40 transition-all duration-300"
         >
           <div className="text-left">
-            <h3 className="text-white text-lg font-bold mb-2 tracking-wide flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-              Selected Contributor - GirlScript Summer of Code
+            <h3 className="text-white text-base md:text-lg font-bold mb-2 tracking-wide flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+              Selected Contributor — GirlScript Summer of Code
             </h3>
             <p className="text-gray-400 text-xs md:text-sm font-medium leading-relaxed max-w-xl">
               Selected to participate in the prestigious GSSoC 2026 program, contributing to real-world codebases. Actively writing features, resolving bugs, and reviewing code in modern, collaborative environments.
             </p>
           </div>
           <div className="shrink-0">
-            <span className="px-5 py-2.5 rounded-full border border-red-500/30 text-red-500 font-bold text-xs uppercase tracking-widest bg-red-950/20">
-              GSSoC '26 Active
+            <span className="px-5 py-2 rounded-full border border-red-500/30 text-red-400 font-bold font-mono text-xs uppercase tracking-widest bg-red-950/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+              GSSoC '26 Cohort
             </span>
           </div>
         </div>
 
         {/* Pull Requests Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {contributions.map((pr, idx) => (
             <SpotlightCard
               key={idx}
               data-aos="fade-up"
-              data-aos-delay={idx * 150}
-              className="bg-[#111111]/60 border border-white/5 rounded-3xl p-6 flex flex-col justify-between hover:border-red-500/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(239,68,68,0.10)] transition-all duration-500 group"
+              data-aos-delay={idx * 120}
+              className="neu-card border border-white/5 rounded-3xl p-6 flex flex-col justify-between hover:border-red-500/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(239,68,68,0.12)] transition-all duration-500 group"
             >
               <div>
                 {/* PR Status HUD */}
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-5">
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-950/30 border border-purple-500/30 text-purple-400">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider bg-purple-950/40 border border-purple-500/30 text-purple-400">
                       PR {pr.prNumber}
                     </span>
-                    <span className="text-[10px] font-mono text-gray-500">
+                    <span className="text-[10px] font-mono text-gray-500 truncate max-w-[120px]">
                       {pr.repo}
                     </span>
                   </div>
                   
                   {/* Status Indicator */}
-                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-950/20 border border-green-500/30 text-green-400">
-                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                    </svg>
+                  <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     {pr.status}
                   </span>
                 </div>
 
-                <h3 className="text-white text-lg font-bold mb-3 group-hover:text-red-500 transition-colors duration-300">
+                <h3 className="text-white text-base font-bold mb-3 group-hover:text-red-400 transition-colors duration-300">
                   {pr.title}
                 </h3>
 
-                <p className="text-gray-400 text-xs leading-relaxed font-medium mb-6">
+                <p className="text-gray-400 text-xs leading-relaxed font-medium mb-5">
                   {pr.description}
                 </p>
               </div>
 
               <div>
                 {/* PR Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-1.5 mb-5">
                   {pr.tags.map((tag, tagIdx) => (
-                    <span key={tagIdx} className="text-[9px] font-bold font-mono bg-black/40 text-red-400/80 border border-red-500/10 px-2 py-0.5 rounded">
+                    <span key={tagIdx} className="text-[9px] font-bold font-mono bg-black/50 text-red-400/85 border border-red-500/10 px-2 py-0.5 rounded">
                       {tag}
                     </span>
                   ))}
@@ -125,14 +153,20 @@ const OpenSource = () => {
                 {/* PR Link Button */}
                 <a 
                   href={pr.link}
-                  target="_blank"
+                  target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-800 text-gray-300 font-bold text-xs hover:bg-white/5 hover:text-white transition-all duration-300"
+                  onClick={() => playBlip(800, 0.03)}
+                  className="inline-flex items-center justify-between w-full px-4 py-2 rounded-xl border border-white/10 hover:border-red-500/40 text-gray-300 hover:text-white font-mono text-xs transition-all duration-300 bg-white/[0.02] hover:bg-red-950/30"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zM11 7v5h2V7h-2zm0 7v3h2v-3h-2z"/>
+                  <span className="flex items-center gap-2">
+                    <svg className="w-3.5 h-3.5 fill-current text-purple-400" viewBox="0 0 24 24">
+                      <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zM11 7v5h2V7h-2zm0 7v3h2v-3h-2z"/>
+                    </svg>
+                    <span>View Merged PR</span>
+                  </span>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  View Pull Request
                 </a>
               </div>
             </SpotlightCard>

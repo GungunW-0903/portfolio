@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment, Lightformer, AdaptiveDpr } from '@react-three/drei';
+import { Float, Environment, Lightformer, AdaptiveDpr, Sparkles } from '@react-three/drei';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 
 /**
@@ -81,8 +81,7 @@ function Cluster({ reducedMotion, crystals }) {
   const groupRef = useRef();
   const pointer = useRef({ x: 0, y: 0 });
 
-  // Track the cursor at the window level (the canvas itself is pointer-events:none,
-  // so clicks pass through to the Hero content).
+  // Track the cursor at the window level
   useEffect(() => {
     if (reducedMotion) return;
     const onMove = (e) => {
@@ -106,6 +105,12 @@ function Cluster({ reducedMotion, crystals }) {
       {crystals.map((data, i) => (
         <Crystal key={i} data={data} reducedMotion={reducedMotion} />
       ))}
+      {!reducedMotion && (
+        <>
+          <Sparkles count={35} scale={12} size={3} speed={0.4} color="#ef4444" opacity={0.6} />
+          <Sparkles count={25} scale={14} size={3.5} speed={0.3} color="#a855f7" opacity={0.5} />
+        </>
+      )}
     </group>
   );
 }
@@ -138,7 +143,7 @@ const CrystalScene = () => {
       <React.Suspense fallback={null}>
         <Cluster reducedMotion={reducedMotion} crystals={crystals} />
 
-        {/* Inline light environment (no HDR fetch) — gives the facets reflections to catch. */}
+        {/* Inline light environment (no HDR fetch) */}
         <Environment resolution={256}>
           <Lightformer intensity={2.5} position={[0, 2, -6]} scale={[12, 6, 1]} color="#ff2a2a" />
           <Lightformer intensity={3.5} position={[-5, 1, 2]} scale={[6, 6, 1]} color="#ffffff" />

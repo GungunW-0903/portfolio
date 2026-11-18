@@ -12,12 +12,14 @@ const ACTIONS = [
   { id: 'projects', label: 'Go to Projects', hint: 'Section', run: () => scrollToId('projects') },
   { id: 'opensource', label: 'Go to Open Source', hint: 'Section', run: () => scrollToId('opensource') },
   { id: 'coding', label: 'Go to Coding Profiles', hint: 'Section', run: () => scrollToId('coding') },
+  { id: 'certificates', label: 'Go to Certifications & Badges', hint: 'Section', run: () => scrollToId('certificates') },
   { id: 'contact', label: 'Go to Contact', hint: 'Section', run: () => scrollToId('contact') },
   { id: 'resume', label: 'Download Resume', hint: 'PDF', run: () => window.open(`${import.meta.env.BASE_URL}resume.pdf`, '_blank') },
   { id: 'email', label: 'Copy Email Address', hint: 'wadhwagungun09@gmail.com', run: () => navigator.clipboard?.writeText('wadhwagungun09@gmail.com') },
   { id: 'github', label: 'Open GitHub Profile', hint: 'External', run: () => window.open('https://github.com/GungunW-0903', '_blank') },
   { id: 'linkedin', label: 'Open LinkedIn', hint: 'External', run: () => window.open('https://www.linkedin.com/in/gungun-wadhwani-0903/', '_blank') },
   { id: 'leetcode', label: 'Open LeetCode', hint: 'External', run: () => window.open('https://leetcode.com/u/lkde5nkwCE/', '_blank') },
+  { id: 'credly', label: 'Open Credly Badges', hint: 'External', run: () => window.open('https://www.credly.com/users/gungun-wadhwani', '_blank') },
 ];
 
 function scrollToId(id) {
